@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 693358520}
   - component: {fileID: 693358519}
   m_Layer: 0
-  m_Name: TerrainGroup_0
+  m_Name: Mountain Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
