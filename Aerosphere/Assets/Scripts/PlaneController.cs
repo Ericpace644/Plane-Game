@@ -40,7 +40,7 @@ public class PlaneController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space)) throttle += throttleIncrement;
         else if (Input.GetKey(KeyCode.LeftControl)) throttle -= throttleIncrement;
-        throttle = Mathf.Clamp(throttle, 1f, 100f);
+        throttle = Mathf.Clamp(throttle, 0f, 100f);
     }
 
     private void Update()
