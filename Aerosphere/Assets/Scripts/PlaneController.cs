@@ -13,6 +13,8 @@ public class PlaneController : MonoBehaviour
     [Tooltip("How responsive the plane is when rolling, pitching or yawing")]
     public float responsiveness = 10f;
 
+    public float lift = 135f;
+
     private float throttle;
     private float roll;
     private float pitch;
@@ -29,6 +31,7 @@ public class PlaneController : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField] TextMeshProUGUI hud;
+    [SerializeField] Transform prop;
 
     private void Awake()
     {
@@ -51,6 +54,8 @@ public class PlaneController : MonoBehaviour
     {
         HandleInputs();
         UpdateHUD();
+
+        prop.Rotate(Vector3.right * throttle);
     }
 
     private void FixedUpdate()
@@ -59,6 +64,8 @@ public class PlaneController : MonoBehaviour
         rb.AddTorque(transform.up * yaw * responseModifier);
         rb.AddTorque(transform.right * pitch * responseModifier);
         rb.AddTorque(transform.forward * roll * responseModifier);
+
+        rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
     }
 
     private void UpdateHUD()
