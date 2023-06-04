@@ -66,7 +66,6 @@ public class MainMenuController : MonoBehaviour
     {
         Fade.SetActive(true);
         index = 1;
-        Debug.Log("new index = " + index);
         TriggerCamChange();
     }
 
@@ -100,11 +99,9 @@ public class MainMenuController : MonoBehaviour
             if (tempcolor.a < 1f)
             {
                 tempcolor.a += OCR;
-                Debug.Log("Decrease Opacity = " + tempcolor.a);
             }
             else
             {
-                Debug.Log("Finished Darkenning");
                 runningdarkness = false;
                 darknesscomplete = true;
             }
@@ -114,7 +111,6 @@ public class MainMenuController : MonoBehaviour
             camtran.position = povs[index].position;
             camtran.rotation = povs[index].rotation;
             runningbrightness = true;
-            Debug.Log("Changed Cam to index = " + index);
         }
         if(runningbrightness == true)
         {
@@ -122,23 +118,19 @@ public class MainMenuController : MonoBehaviour
             if (tempcolor.a > 0f)
             {
                 tempcolor.a -= OCR;
-                Debug.Log("Increase Opacity = " + tempcolor.a);
             }
             else
             {
                 runningbrightness = false;
                 brightnesscomplete = true;
                 Fade.SetActive(false);
-                Debug.Log("Finished Brightening");
             }
         }
         darkness.color = tempcolor;
-        Debug.Log("Opacity is infact = " + darkness.color);
     }
 
     private void TriggerCamChange()
     {
-        Debug.Log("TriggerCamChange");
         runningdarkness = true;
         runningbrightness = false;
         brightnesscomplete = false;
