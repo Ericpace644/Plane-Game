@@ -25,8 +25,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject cam;
 
     [SerializeField] Transform[] povs;
-    [SerializeField] GameObject[] plane;
-    //[SerializeField] GameObject darkness;
+    
 
     private int index = 0;
     
@@ -34,13 +33,14 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
-        
+        float temp = OCR;
+        OCR = temp / 255;
 
     }
 
     private void Start()
     {
-        darkness = GameObject.Find("Darkness").GetComponent<Image>();
+        darkness = Fade.GetComponent<Image>();
         camtran = cam.GetComponent<Transform>();
         Fade.SetActive(false);
         Debug.Log(camtran.position);
@@ -97,7 +97,7 @@ public class MainMenuController : MonoBehaviour
 
         if(runningdarkness == true)
         {
-            if (tempcolor.a < 255f)
+            if (tempcolor.a < 1f)
             {
                 tempcolor.a += OCR;
                 Debug.Log("Decrease Opacity = " + tempcolor.a);
@@ -109,7 +109,7 @@ public class MainMenuController : MonoBehaviour
                 darknesscomplete = true;
             }
         }
-        if(darknesscomplete == true && brightnesscomplete == false)
+        if(darknesscomplete == true && brightnesscomplete == false && runningbrightness != true)
         {
             camtran.position = povs[index].position;
             camtran.rotation = povs[index].rotation;
@@ -143,10 +143,5 @@ public class MainMenuController : MonoBehaviour
         runningbrightness = false;
         brightnesscomplete = false;
         darknesscomplete = false;
-    }
-
-    private void PlaneUpdate()
-    {
-        
     }
 }

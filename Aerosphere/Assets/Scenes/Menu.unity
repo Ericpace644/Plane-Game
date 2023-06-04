@@ -1224,16 +1224,18 @@ MonoBehaviour:
   mainCanvas: {fileID: 981812295}
   controlCanvas: {fileID: 1475220892}
   creditsCanvs: {fileID: 1069118907}
-  OCR: 1
+  OCR: 10
   Fade: {fileID: 1943110987}
   darkness: {fileID: 1943110989}
   camtran: {fileID: 1297021951}
-  cam: {fileID: 839551237}
+  cam: {fileID: 1297021948}
   povs:
   - {fileID: 1249308885}
   - {fileID: 2003081843}
   - {fileID: 424238389}
-  plane: []
+  plane:
+  - {fileID: 425167316}
+  - {fileID: 1787318563}
 --- !u!1 &860672625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3618,6 +3620,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761229419}
   m_CullTransparentMesh: 1
+--- !u!1 &1787318563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5525295603368428666, guid: f6d4109da7a8fb14598e335baed19ec6, type: 3}
+  m_PrefabInstance: {fileID: 761463582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867801792
 GameObject:
   m_ObjectHideFlags: 0
