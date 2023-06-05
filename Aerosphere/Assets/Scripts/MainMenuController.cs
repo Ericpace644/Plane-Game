@@ -88,6 +88,14 @@ public class MainMenuController : MonoBehaviour
         TriggerCamChange();
     }
 
+    public void ExitButton()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
+    }
+
     private void UpdateCamera()
     {
         var tempcolor = darkness.color;
