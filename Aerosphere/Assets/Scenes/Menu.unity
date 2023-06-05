@@ -1454,6 +1454,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5180858929285816000, guid: f6d4109da7a8fb14598e335baed19ec6, type: 3}
   m_PrefabInstance: {fileID: 761463582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &761463584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5525295603368428666, guid: f6d4109da7a8fb14598e335baed19ec6, type: 3}
+  m_PrefabInstance: {fileID: 761463582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &761463585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761463584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4279f5a9a5aa3a488b93b5f3bca22a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Light: {fileID: 1616078150}
+  RedBeacons:
+  - {fileID: 1349859423}
+  - {fileID: 1940003148}
+  onDuration: 10
+  offDuration: 80
+  RonDuration: 10
+  RoffDuration: 70
+  pausecounter: 0
+  rollIncrement: 5
 --- !u!1 &839551237
 GameObject:
   m_ObjectHideFlags: 0

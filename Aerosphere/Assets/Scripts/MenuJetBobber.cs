@@ -5,17 +5,23 @@ using UnityEngine;
 public class MenuJetBobber : MonoBehaviour
 {
     [SerializeField] GameObject Light;
+    [SerializeField] GameObject[] RedBeacons;
 
     private int onTimer = 1;
     public int onDuration = 10;
     private int offTimer = 0;
-    public int offDuration = 20;
+    public int offDuration = 80;
     private int counter = 0;
 
+    private int RonTimer = 1;
+    public int RonDuration = 10;
+    private int RoffTimer = 0;
+    public int RoffDuration = 70;
+    private int Rcounter = 0;
+
     public int pausecounter = 0;
-    public int rollIncrement = 5;
+    public float rollIncrement = 0.1f;
     private bool rollRight = true;
-    private bool rollLeft = false;
     private bool pause = false;
     private Vector3 temp;
 
@@ -24,7 +30,7 @@ public class MenuJetBobber : MonoBehaviour
     {
         LightUpdate();
         RollUpdate();
-
+        RedLightUpdate();
     }
 
     private void LightUpdate()
@@ -53,49 +59,94 @@ public class MenuJetBobber : MonoBehaviour
         }
     }
 
+
+    private void RedLightUpdate()
+    {
+        if (RonTimer == 1 && Rcounter < RonDuration)
+        {
+            Debug.Log("1");
+            Rcounter++;
+        }
+        if (RonTimer == 1 && Rcounter == RonDuration)
+        {
+            Debug.Log("2");
+            RedBeacons[1].SetActive(false);
+            RedBeacons[0].SetActive(false);
+            Rcounter = 0;
+            RonTimer = 0;
+            RoffTimer = 1;
+        }
+        if (RoffTimer == 1 && Rcounter < RoffDuration)
+        {
+            Debug.Log("3");
+            Rcounter++;
+        }
+        if (RoffTimer == 1 && Rcounter == RoffDuration)
+        {
+            Debug.Log("4");
+            RedBeacons[1].SetActive(true);
+            RedBeacons[0].SetActive(true);
+            Rcounter = 0;
+            RonTimer = 1;
+            RoffTimer = 0;
+        }
+    }
+
     private void RollUpdate()
     {
         temp = gameObject.transform.eulerAngles;
-        if (rollRight == true && rollLeft == false && pause == false && temp.z > -20)
+        //temp.z += 360;
+        Debug.Log(temp.z);
+        if (rollRight && !pause && temp.z > 340)
         {
+            //Debug.Log("1");
             temp.z -= rollIncrement;
+
         }
-        if (rollRight == true && rollLeft == false && pause == false && temp.z <= -20)
+        if (rollRight && !pause && temp.z <= 340)
         {
+            //Debug.Log("2");
             pause = true;
+
         }
-        if (rollRight == true && rollLeft == false && pause == true && pausecounter < 20)
+        if (pause && pausecounter < 20)
         {
+            //Debug.Log("3 " + pausecounter);
             pausecounter++;
         }
-        if (rollRight == true && rollLeft == false && pause == true && pausecounter >= 20)
+        if (rollRight && pause && pausecounter >= 20)
         {
+            //Debug.Log("4");
             rollRight = false;
             pause = false;
-            rollLeft = true;
+
             pausecounter = 0;
         }
 
 
-        if (rollRight == false && rollLeft == true && pause == false && temp.z < 20)
+        if (!rollRight && !pause && temp.z < 380)
         {
+            //Debug.Log("5");
             temp.z += rollIncrement;
         }
-        if (rollRight == false && rollLeft == true && pause == false && temp.z >= 20)
+        if (!rollRight && !pause && temp.z >= 380)
         {
+            //Debug.Log("6");
             pause = true;
         }
-        if (rollRight == false && rollLeft == true && pause == true && pausecounter < 20)
+        if (!rollRight && pause && pausecounter < 20)
         {
+            //Debug.Log("7");
             pausecounter++;
         }
-        if (rollRight == false && rollLeft == true && pause == true && pausecounter >= 20)
+        if (!rollRight && pause && pausecounter >= 20)
         {
+            //Debug.Log("8");
             rollRight = true;
             pause = false;
-            rollLeft = false;
             pausecounter = 0;
         }
-        gameObject.transform.Rotate(temp.x, temp.y, temp.x, Space.World);
+        //temp.z -= 360;
+        gameObject.transform.eulerAngles = temp;
     }
 }
