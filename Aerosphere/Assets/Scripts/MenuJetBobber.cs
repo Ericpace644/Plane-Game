@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuPlaneBobber : MonoBehaviour
+public class MenuJetBobber : MonoBehaviour
 {
     [SerializeField] GameObject Light;
-    public Transform prop;
 
     private int onTimer = 1;
     public int onDuration = 10;
@@ -13,19 +12,18 @@ public class MenuPlaneBobber : MonoBehaviour
     public int offDuration = 20;
     private int counter = 0;
 
-    private int pausecounter = 0;
-    public float rollIncrement = 0.1f;
+    public int pausecounter = 0;
+    public int rollIncrement = 5;
     private bool rollRight = true;
     private bool rollLeft = false;
     private bool pause = false;
     private Vector3 temp;
-    
+
 
     private void Update()
     {
         LightUpdate();
         RollUpdate();
-        prop.Rotate(Vector3.right * 50);
 
     }
 
@@ -58,26 +56,20 @@ public class MenuPlaneBobber : MonoBehaviour
     private void RollUpdate()
     {
         temp = gameObject.transform.eulerAngles;
-        if (rollRight == true && rollLeft == false && pause == false && temp.z > 340)
+        if (rollRight == true && rollLeft == false && pause == false && temp.z > -20)
         {
-            Debug.Log("1");
             temp.z -= rollIncrement;
-          
         }
-        if (rollRight == true && rollLeft == false && pause == false && temp.z <= 340)
+        if (rollRight == true && rollLeft == false && pause == false && temp.z <= -20)
         {
-            Debug.Log("2");
             pause = true;
-            
         }
         if (rollRight == true && rollLeft == false && pause == true && pausecounter < 20)
         {
-            Debug.Log("3");
             pausecounter++;
         }
         if (rollRight == true && rollLeft == false && pause == true && pausecounter >= 20)
         {
-            Debug.Log("4");
             rollRight = false;
             pause = false;
             rollLeft = true;
@@ -87,27 +79,23 @@ public class MenuPlaneBobber : MonoBehaviour
 
         if (rollRight == false && rollLeft == true && pause == false && temp.z < 20)
         {
-            Debug.Log("5");
             temp.z += rollIncrement;
         }
         if (rollRight == false && rollLeft == true && pause == false && temp.z >= 20)
         {
-            Debug.Log("6");
             pause = true;
         }
         if (rollRight == false && rollLeft == true && pause == true && pausecounter < 20)
         {
-            Debug.Log("7");
             pausecounter++;
         }
         if (rollRight == false && rollLeft == true && pause == true && pausecounter >= 20)
         {
-            Debug.Log("8");
             rollRight = true;
             pause = false;
             rollLeft = false;
             pausecounter = 0;
         }
-        gameObject.transform.eulerAngles = temp;
+        gameObject.transform.Rotate(temp.x, temp.y, temp.x, Space.World);
     }
 }

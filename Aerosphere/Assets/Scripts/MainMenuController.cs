@@ -43,8 +43,6 @@ public class MainMenuController : MonoBehaviour
         darkness = Fade.GetComponent<Image>();
         camtran = cam.GetComponent<Transform>();
         Fade.SetActive(false);
-        Debug.Log(camtran.position);
-        Debug.Log(povs[index].position);
     }
 
     private void Update()
