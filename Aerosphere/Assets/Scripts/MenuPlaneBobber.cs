@@ -57,29 +57,23 @@ public class MenuPlaneBobber : MonoBehaviour
     private void RollUpdate()
     {
         temp = gameObject.transform.eulerAngles;
-        temp.z += 360;
-        Debug.Log("temp = " + temp.z);
-        Debug.Log("gameobject = " + gameObject.transform.eulerAngles.z);
-        if (rollRight && !pause && temp.z > 700)
+        if (temp.z < 40) temp.z += 360;
+        if (rollRight && !pause && temp.z > 340)
         {
-            Debug.Log("1");
             temp.z -= rollIncrement;
           
         }
-        if (rollRight && !pause && temp.z <= 700 && temp.z >= 699)
+        if (rollRight && !pause && temp.z <= 340)
         {
-            Debug.Log("2");
             pause = true;
 
         }
         if (pause && pausecounter < 20)
         {
-            Debug.Log("3 " + pausecounter);
             pausecounter++;
         }
         if (rollRight && pause && pausecounter >= 20)
         {
-            Debug.Log("4");
             rollRight = false;
             pause = false;
 
@@ -89,22 +83,19 @@ public class MenuPlaneBobber : MonoBehaviour
 
         if (!rollRight  && !pause && temp.z < 380)
         {
-            Debug.Log("5");
             temp.z += rollIncrement;
         }
         if (!rollRight && !pause && temp.z >= 380)
         {
-            Debug.Log("6");
             pause = true;
         }
         if (!rollRight && pause && pausecounter >= 20)
         {
-            Debug.Log("8");
             rollRight = true;
             pause = false;
             pausecounter = 0;
         }
-        temp.z %= 360;
+        if (temp.z > 360) temp.z -= 360;
         gameObject.transform.eulerAngles = temp;
     }
 }

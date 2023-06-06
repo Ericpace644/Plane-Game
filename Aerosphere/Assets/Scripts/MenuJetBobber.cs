@@ -91,14 +91,13 @@ public class MenuJetBobber : MonoBehaviour
     private void RollUpdate()
     {
         temp = gameObject.transform.eulerAngles;
-        
-        temp.z += 360;
-        if (rollRight && !pause && temp.z > 340)
+        if (temp.z < 40) temp.z += 360;
+        if (rollRight && !pause && temp.z > 350)
         {
             temp.z -= rollIncrement;
 
         }
-        if (rollRight && !pause && temp.z <= 340)
+        if (rollRight && !pause && temp.z <= 350)
         {
             pause = true;
 
@@ -116,17 +115,13 @@ public class MenuJetBobber : MonoBehaviour
         }
 
 
-        if (!rollRight && !pause && temp.z < 380)
+        if (!rollRight && !pause && temp.z < 370)
         {
             temp.z += rollIncrement;
         }
-        if (!rollRight && !pause && temp.z >= 380)
+        if (!rollRight && !pause && temp.z >= 370)
         {
             pause = true;
-        }
-        if (!rollRight && pause && pausecounter < 20)
-        {
-            pausecounter++;
         }
         if (!rollRight && pause && pausecounter >= 20)
         {
@@ -134,7 +129,7 @@ public class MenuJetBobber : MonoBehaviour
             pause = false;
             pausecounter = 0;
         }
-        temp.z %= 360;
+        if (temp.z > 360) temp.z -= 360;
         gameObject.transform.eulerAngles = temp;
     }
 }
