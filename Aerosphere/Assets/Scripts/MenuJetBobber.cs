@@ -64,12 +64,10 @@ public class MenuJetBobber : MonoBehaviour
     {
         if (RonTimer == 1 && Rcounter < RonDuration)
         {
-            Debug.Log("1");
             Rcounter++;
         }
         if (RonTimer == 1 && Rcounter == RonDuration)
         {
-            Debug.Log("2");
             RedBeacons[1].SetActive(false);
             RedBeacons[0].SetActive(false);
             Rcounter = 0;
@@ -78,12 +76,10 @@ public class MenuJetBobber : MonoBehaviour
         }
         if (RoffTimer == 1 && Rcounter < RoffDuration)
         {
-            Debug.Log("3");
             Rcounter++;
         }
         if (RoffTimer == 1 && Rcounter == RoffDuration)
         {
-            Debug.Log("4");
             RedBeacons[1].SetActive(true);
             RedBeacons[0].SetActive(true);
             Rcounter = 0;
@@ -95,28 +91,24 @@ public class MenuJetBobber : MonoBehaviour
     private void RollUpdate()
     {
         temp = gameObject.transform.eulerAngles;
-        //temp.z += 360;
-        Debug.Log(temp.z);
+        
+        temp.z += 360;
         if (rollRight && !pause && temp.z > 340)
         {
-            //Debug.Log("1");
             temp.z -= rollIncrement;
 
         }
         if (rollRight && !pause && temp.z <= 340)
         {
-            //Debug.Log("2");
             pause = true;
 
         }
         if (pause && pausecounter < 20)
         {
-            //Debug.Log("3 " + pausecounter);
             pausecounter++;
         }
         if (rollRight && pause && pausecounter >= 20)
         {
-            //Debug.Log("4");
             rollRight = false;
             pause = false;
 
@@ -126,27 +118,23 @@ public class MenuJetBobber : MonoBehaviour
 
         if (!rollRight && !pause && temp.z < 380)
         {
-            //Debug.Log("5");
             temp.z += rollIncrement;
         }
         if (!rollRight && !pause && temp.z >= 380)
         {
-            //Debug.Log("6");
             pause = true;
         }
         if (!rollRight && pause && pausecounter < 20)
         {
-            //Debug.Log("7");
             pausecounter++;
         }
         if (!rollRight && pause && pausecounter >= 20)
         {
-            //Debug.Log("8");
             rollRight = true;
             pause = false;
             pausecounter = 0;
         }
-        //temp.z -= 360;
+        temp.z %= 360;
         gameObject.transform.eulerAngles = temp;
     }
 }

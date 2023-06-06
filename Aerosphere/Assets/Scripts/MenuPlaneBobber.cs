@@ -15,7 +15,7 @@ public class MenuPlaneBobber : MonoBehaviour
 
     private int pausecounter = 0;
     public float rollIncrement = 0.1f;
-    private bool rollRight = true;
+    private bool rollRight = false;
     private bool pause = false;
     private Vector3 temp;
     
@@ -57,28 +57,29 @@ public class MenuPlaneBobber : MonoBehaviour
     private void RollUpdate()
     {
         temp = gameObject.transform.eulerAngles;
-        //temp.z += 360;
-        Debug.Log(temp.z);
-        if (rollRight && !pause && temp.z > 340)
+        temp.z += 360;
+        Debug.Log("temp = " + temp.z);
+        Debug.Log("gameobject = " + gameObject.transform.eulerAngles.z);
+        if (rollRight && !pause && temp.z > 700)
         {
-            //Debug.Log("1");
+            Debug.Log("1");
             temp.z -= rollIncrement;
           
         }
-        if (rollRight && !pause && temp.z <= 340)
+        if (rollRight && !pause && temp.z <= 700 && temp.z >= 699)
         {
-            //Debug.Log("2");
+            Debug.Log("2");
             pause = true;
 
         }
         if (pause && pausecounter < 20)
         {
-            //Debug.Log("3 " + pausecounter);
+            Debug.Log("3 " + pausecounter);
             pausecounter++;
         }
         if (rollRight && pause && pausecounter >= 20)
         {
-            //Debug.Log("4");
+            Debug.Log("4");
             rollRight = false;
             pause = false;
 
@@ -86,29 +87,24 @@ public class MenuPlaneBobber : MonoBehaviour
         }
 
 
-        if (!rollRight   && !pause && temp.z < 380)
+        if (!rollRight  && !pause && temp.z < 380)
         {
-            //Debug.Log("5");
+            Debug.Log("5");
             temp.z += rollIncrement;
         }
         if (!rollRight && !pause && temp.z >= 380)
         {
-            //Debug.Log("6");
+            Debug.Log("6");
             pause = true;
-        }
-        if (!rollRight && pause && pausecounter < 20)
-        {
-            //Debug.Log("7");
-            pausecounter++;
         }
         if (!rollRight && pause && pausecounter >= 20)
         {
-            //Debug.Log("8");
+            Debug.Log("8");
             rollRight = true;
             pause = false;
             pausecounter = 0;
         }
-        //temp.z -= 360;
+        temp.z %= 360;
         gameObject.transform.eulerAngles = temp;
     }
 }
