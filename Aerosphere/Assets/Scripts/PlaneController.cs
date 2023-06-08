@@ -13,6 +13,8 @@ public class PlaneController : MonoBehaviour
     [Tooltip("How responsive the plane is when rolling, pitching or yawing")]
     public float responsiveness = 10f;
 
+    public float turnrate = 10f;
+
     public float lift = 135f;
 
     private float throttle;
@@ -65,7 +67,9 @@ public class PlaneController : MonoBehaviour
         rb.AddTorque(transform.right * pitch * responseModifier);
         rb.AddTorque(transform.forward * roll * responseModifier);
 
-        rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
+        rb.AddForce(transform.up * rb.velocity.magnitude * lift);
+
+        rb.AddTorque(Vector3.right * roll * turnrate);
     }
 
     private void UpdateHUD()
