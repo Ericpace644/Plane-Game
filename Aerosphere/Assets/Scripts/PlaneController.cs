@@ -69,7 +69,7 @@ public class PlaneController : MonoBehaviour
 
         rb.AddForce(transform.up * rb.velocity.magnitude * lift);
 
-        rb.AddTorque(Vector3.right * roll * turnrate);
+        rb.AddTorque(Vector3.right * transform.eulerAngles.z);
     }
 
     private void UpdateHUD()
