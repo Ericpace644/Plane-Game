@@ -22,6 +22,8 @@ public class PlaneController : MonoBehaviour
     private float pitch;
     private float yaw;
 
+    private Vector3 temp;
+
     private float responseModifier
     {
         get
@@ -69,7 +71,15 @@ public class PlaneController : MonoBehaviour
 
         rb.AddForce(transform.up * rb.velocity.magnitude * lift);
 
-        rb.AddTorque(Vector3.right * transform.eulerAngles.z);
+        //if (transform.eulerAngles.z > 10 && transform.eulerAngles.z < 350)
+        //{
+        //    temp = gameObject.transform.eulerAngles;
+        //    if (temp.y > 180) temp.y -= 360;
+        //    if (temp.y >= 0) temp.y += (gameObject.transform.eulerAngles.z * 0.001f);
+        //    if (temp.y < 0) temp.y -= (gameObject.transform.eulerAngles.z * 0.001f);
+        //    if (temp.y < 0) temp.y += 360;
+        //    gameObject.transform.eulerAngles = temp;
+        //}
     }
 
     private void UpdateHUD()
