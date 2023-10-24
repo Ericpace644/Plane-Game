@@ -58,8 +58,18 @@ public class PlaneController : MonoBehaviour
     {
         HandleInputs();
         UpdateHUD();
-
-        prop.Rotate(Vector3.right * throttle);
+        if (throttle > 0 && throttle < 30)
+        {
+            prop.Rotate(Vector3.right * 10);
+        }
+        else if (throttle >= 40 && throttle < 80)
+        {
+            prop.Rotate(Vector3.right * 20);
+        }
+        else if (throttle >= 80)
+        {
+            prop.Rotate(Vector3.right * 30);
+        }
     }
 
     private void FixedUpdate()
